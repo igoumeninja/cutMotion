@@ -1,6 +1,9 @@
 //:Load images to oF
+//:=================
+
+//:Create the hashTable
 ~imageLib = MultiLevelIdentityDictionary.new;
-~loadImages2oF = { | path = "~/images/ambiantWorkshop/FRAMES2/*" |
+~loadImages2oF = { | path = "/Users/ioanna/Dropbox/GB-AB/images/*" |
 	var folders, files, imageDict;
 	imageDict = IdentityDictionary.new;
 	folders = path.pathMatch;
@@ -24,7 +27,11 @@
 	}.fork;
 };
 
+//:evaluate the function
 ~loadImages2oF.value;
+
+//:
+
 
 //:---------------------------------------------------------
 //----------------------------------------------------------
@@ -33,7 +40,7 @@
 //:image mapping mechanism;
 ~imageLib = MultiLevelIdentityDictionary.new;
 
-~imageLib.put('eleni1', 10, 532);
+~imageLib.put('Sanborn-Typography', 10, 532);
 ~imageLib.put('eleni1', 50, 4432);
 
 ~imageLib.at('eleni1', 50);

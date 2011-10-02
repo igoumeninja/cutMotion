@@ -17,13 +17,13 @@ void testApp::setup(){
 		ofEnableAlphaBlending();
 		ofBackground(0,0,0);
 		ofSetFrameRate(60);
-		ofSetWindowTitle("Eleni - AudioVisual Performance Tribute to Ambiant Workshop Sat, 30 July 2011");
+		ofSetWindowTitle("cutMotion - real time interactive stop motion engine");
 		
 		texScreen.allocate(ofGetWidth(), ofGetHeight(),GL_RGB);// GL_RGBA); 
 	}	//Screen
 	{
 		texScreen.allocate(ofGetWidth(), ofGetHeight(),GL_RGB);// GL_RGBA); 
-		screen.allocate(ofGetWidth(), ofGetHeight(),GL_RGB);
+		//screen.allocate(ofGetWidth(), ofGetHeight(),GL_RGB);
 		
 	}	//Texture
 	{
@@ -31,11 +31,6 @@ void testApp::setup(){
 		receiver.setup( PORT );
 		current_msg_string = 0;
 	}	//OSC
-	{		
-		for (int i = 0; i < MAX_SKETCHES; i++){
-			sketch[i].init(ofRandom(0.01, 0.29), ofRandom(0.01, 0.29));
-		}
-	}	//sketch
 	{
 		iv["textureRed"] = iv["textureGreen"] = iv["textureBlue"] = iv["textureAlpha"] = 255;
 		iv["reverseEllipse"] = ofGetWidth();	iv["reverseTexture"] = -1;
@@ -206,19 +201,6 @@ void testApp::draw(){
 		 default:
 			printf("%d", fv["mirrorMode"]);
 		}	// mirrowMode
-	if (iv["sketch"] == 1)	{	
-		if(mouseX > 0 and mouseX < imgWidth and mouseY > 0 and mouseY < imgHeight)	{
-			unsigned char * pixels = image[0].getPixels();
-			int index = mouseY*imgWidth*3 + mouseX*3;
-			iv["redSketch"] = pixels[index];
-			iv["greenSketch"] = pixels[index+1];
-			iv["blueSketch"] = pixels[index+2];
-			for( int i=0; i<MAX_SKETCHES; i++ ) {
-
-				sketch[i].draw(mouseX, mouseY, 0, iv["redSketch"], iv["greenSketch"], iv["blueSketch"], iv["alphaSketch"], 0);	
-			}		
-		}
-	}
 	if (iv["pixelate"] == 1)	{
 		
 		unsigned char * pixels = image[0].getPixels();

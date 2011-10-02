@@ -2,7 +2,6 @@
 #define _TEST_APP
 
 #include "ofMain.h"
-#include "ofSketch.h"
 #include "ofxOsc.h"
 #include "ofxOpenCv.h"
 // 
@@ -40,7 +39,6 @@ class testApp : public ofBaseApp{
 		ofImage			screen;		
 		
 		ofTrueTypeFont	font;
-		ofSketch		sketch[MAX_SKETCHES];
 
 		
 		map<string, int> iv;

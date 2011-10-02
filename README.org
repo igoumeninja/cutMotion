@@ -39,3 +39,6 @@ OF.img(0, 0, 0, 400, 400);
 //:---------
 
 #+end_EXAMPLE
+
+** load-images
+We use a MultiLevelIdentityDictionary for load the images.

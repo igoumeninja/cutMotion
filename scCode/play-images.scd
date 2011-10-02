@@ -6,32 +6,29 @@
 ~width = 1280;
 ~height = 1024;
 ~delay = 0.01;
-//:Format Func
-f = { | int |
-	var length, string;
-	string = "0000".copy;
-	length = string.size - 1;
-	int.asString.reverse do: { | i, count | string[length - count] = i };
-	string.postln;
-};
-//:Load Pixelation Images
-{
-	96.do {	|i|
-		OF.loadImage(i, format("/Users/fou/images/pixxilation/%.JPG", f.(i)));
-		0.1.wait;
-	}
-}.fork;
-//:Load RVGMES Images
-{
-	~numImg.do {	|i|
-		OF.loadImage(i, format("/Users/fou/images/rogmes/set1/%.jpg", f.(i)));
-		0.1.wait;
-	}
-}.fork;
+~group = \CASTLE1;
+~group = \CASTLEN;
+//:Trigger responder
+r = OSCresponder.new(nil, "onset", { 
+	arg time, resp, msg; 
+	"ok".postln;
+	OF.img(rrand(0,485).asInteger,0,0,~width, ~height);
+	} ).add; 
+
 //:Play a Demo
+
+~imageLib.at(\CASTLE3, 0);
+~imageLib.at(\CASTLEN, 0);
+
+
+~imageLib.at(~group, 0);
+
+
+~imageLib.asCompileString;
+//:----
 {
 	inf.do {
-		90.do { |i|
+		485.do { |i|
 			OF.img(i.asInteger,0,0,~width, ~height);
 			0.01.wait;
 		};
@@ -40,22 +37,22 @@ f = { | int |
 //:Random Rotate Images
 {
 	inf.do{
-			OF.img(1,rrand(0,1280),rrand(0,780),rrand(400,1280),rrand(400,780),rrand(0,360),rrand(0,360),rrand(0,360));
-	0.005.wait;
+			OF.img(rrand(0,484).asInteger,rrand(0,1280),rrand(0,780),rrand(400,1280),rrand(400,780),rrand(0,360),rrand(0,360),rrand(0,360));
+	0.01.wait;
 	}
 }.fork;
 //:Random smal Rotate Images
 {
 	inf.do{
-			OF.img(rrand(0,90).asInteger,rrand(0,1280),rrand(0,780),rrand(100,280),rrand(100,280),rrand(0,360),rrand(0,360),rrand(0,360));
-	0.005.wait;
+			OF.img(rrand(0,484).asInteger,rrand(0,1280),rrand(0,780),rrand(100,280),rrand(100,280),rrand(0,360),rrand(0,360),rrand(0,360));
+	rrand(0.01, 0.05).wait;
 	}
 }.fork;
 
 //:Rotate Images
 {
 	inf.do{|i|
-		OF.img(1, ~width/2, ~height/2, 400,400, i,i,0);
+		OF.img(rrand(0,484).asInteger, ~width/2, ~height/2, 400,400, i,i,0);
 		0.005.wait;
 	}
 }.fork;
@@ -128,13 +125,13 @@ OF.int("alphaSketch",3);
 OF.int("edgeDetection",1);
 //:Collage
 k = {
-	~delayTime = 0.005;
+	~delayTime = 0.1;
 	~countX = 0; 
 	~countY = 0;
 	~fotoWidth = ~fotoHeight = ~width/20;
 	~fotoHeight = ~fotoWidth;
 	inf.do{
-	95.do{ |i|
+	84.do{ |i|
 		OF.img(i, ~countX, ~countY, ~fotoWidth, ~fotoHeight);
 		~countX = ~countX + ~fotoWidth;
 		if (~countX>~width, {~countX = 0;~countY = ~countY + ~fotoHeight});
@@ -154,7 +151,7 @@ k = {
 	~fotoWidth = ~fotoHeight = ~screenWidth/20;
 	~fotoHeight = ~fotoWidth;
 	inf.do{
-	95.do{ |i|
+	475.do{ |i|
 		i.postln;		
 		OF.img(95.rand.asInteger, ~screenWidth.rand,  ~screenHeight.rand, 100, 100*720/1280);
 		~delayTime.wait;
@@ -366,3 +363,28 @@ Posc.play(
 10.do{OF.img(rrand(0,95).asInteger,rrand(0,1280),rrand(0,780),rrand(400,1280),rrand(400,780));}
 //:--
 OF.loadImage(1,"/Users/fou/images/pixxilation/0000.JPG");
+
+//:cut Motion fullscreen routine
+{
+	1500.do{
+		OF.img(rrand(0,30).asInteger, 0, 0, 1280, 1024);
+		0.1.wait;
+	}
+}.fork;
+
+//:cut Motion center routine
+{
+	1500.do{
+		OF.img(rrand(0,30).asInteger, 0, 0, 1280, 1024);
+		0.01.wait;
+	}
+}.fork;
+
+//:cut Motion rotate routine
+{
+	1500.do{ |i|
+		OF.img(rrand(0,30).asInteger, 0, 0, 1280, 1024, i,i,i);
+		0.01.wait;
+	}
+}.fork;
+
