@@ -8,23 +8,58 @@
 ~delay = 0.01;
 ~group = \CASTLE1;
 ~group = \CASTLEN;
-//:Trigger responder
+
+//:====================
+//:Amplitude detection
+//:====================
+
+s.boot.doWhenBooted {
+	// Prepare the buffers
+	b = Buffer.alloc(s, 512);
+	// Feel free to load a more interesting clip!
+	// a11wlk01 is not an ideal example of musical onsets.
+	d = Buffer.read(s, "sounds/a11wlk01.wav");
+};
+
+
+//:fft and send reply
+x = { | threshold = 0.9, out = 100 |
+	var sig, chain, onsets, pips;
+	
+	// A simple generative signal
+	//sig = LPF.ar(Pulse.ar(TIRand.kr(63,75,Impulse.kr(2)).midicps), LFNoise2.kr(0.5).exprange(100, 10000)) * Saw.ar(2).range(0, 1);
+	// or, uncomment this line if you want to play the buffer in
+	//sig = PlayBuf.ar(1, d, BufRateScale.kr(d), loop: 1);
+
+	sig = In.ar(8);	
+	chain = FFT(b, sig);
+
+	onsets = Onsets.kr(chain, threshold, \rcomplex);
+	SendReply.kr(onsets, \onset);
+	// You'll hear percussive "ticks" whenever an onset is detected
+	//pips = WhiteNoise.ar(EnvGen.kr(Env.perc(0.001, 0.1, 0.2), onsets));
+	//Out.ar(out, Pan2.ar(pips, 0.75, 1));
+
+}.play;
+
+//:set threshold
+x.set(\threshold, 0.9);
+//:free onset
+x.free; // Free the synth
+//:amp trigger responder
+r = OSCresponder(nil, \onset, {
+	"onset".postln;
+	NetAddr("127.0.0.1", 57120).sendMsg(\onset);
+//	NetAddr("192.0.0.21", 57120).sendMsg(\onset);	
+}).add;
+
+//:Trigger-responder-old
 r = OSCresponder.new(nil, "onset", { 
 	arg time, resp, msg; 
 	"ok".postln;
-	OF.img(rrand(0,485).asInteger,0,0,~width, ~height);
+	OF.img(rrand(0,85).asInteger,0,0,~width, ~height);
 	} ).add; 
 
-//:Play a Demo
-
-~imageLib.at(\CASTLE3, 0);
-~imageLib.at(\CASTLEN, 0);
-
-
-~imageLib.at(~group, 0);
-
-
-~imageLib.asCompileString;
 //:----
 {
 	inf.do {
