@@ -72,14 +72,14 @@ r = OSCresponder.new(nil, "onset", {
 //:Random Rotate Images
 {
 	inf.do{
-			OF.img(rrand(0,84).asInteger,rrand(0,1280),rrand(0,780),rrand(400,1280),rrand(400,780),rrand(0,360),rrand(0,360),rrand(0,360));
-	0.01.wait;
+			OF.img(rrand(0,12).asInteger,rrand(0,1280),rrand(0,780),rrand(400,1280),rrand(400,780),rrand(0,360),rrand(0,360),rrand(0,360));
+	0.1.wait;
 	}
 }.fork;
 //:Random smal Rotate Images
 {
 	inf.do{
-			OF.img(rrand(0,84).asInteger,rrand(0,1280),rrand(0,780),rrand(100,280),rrand(100,280),rrand(0,360),rrand(0,360),rrand(0,360));
+			OF.img(rrand(0,59).asInteger,rrand(0,1280),rrand(0,780),rrand(100,280),rrand(100,280),rrand(0,360),rrand(0,360),rrand(0,360));
 	rrand(0.01, 0.05).wait;
 	}
 }.fork;
@@ -166,7 +166,7 @@ k = {
 	~fotoWidth = ~fotoHeight = ~width/20;
 	~fotoHeight = ~fotoWidth;
 	inf.do{
-	84.do{ |i|
+	60.do{ |i|
 		OF.img(i, ~countX, ~countY, ~fotoWidth, ~fotoHeight);
 		~countX = ~countX + ~fotoWidth;
 		if (~countX>~width, {~countX = 0;~countY = ~countY + ~fotoHeight});

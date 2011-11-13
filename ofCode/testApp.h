@@ -34,7 +34,7 @@ class testApp : public ofBaseApp{
 
 		
 		
-		ofImage			image[7000];
+		ofImage			image[200];
 		
 		ofImage			screen;		
 		

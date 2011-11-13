@@ -9,14 +9,19 @@ testApp::testApp(){
 //--------------------------------------------------------------
 void testApp::setup(){
 	{
-	
+		//traditional loading
+		//image[0].loadImage("/Users/ari/Media/images/bibliOdyssey/Australian-Places/Cape-Otway-Ranges.jpg");
 		//ofSetFullscreen(true);
+		ofSetCircleResolution(200);
+		ofSetVerticalSync(false);
+
+		
 		
 		ofSetBackgroundAuto(false);
 		ofEnableSmoothing();
 		ofEnableAlphaBlending();
 		ofBackground(0,0,0);
-		ofSetFrameRate(60);
+		ofSetFrameRate(30);
 		ofSetWindowTitle("cutMotion - real time interactive stop motion engine");
 		
 		texScreen.allocate(ofGetWidth(), ofGetHeight(),GL_RGB);// GL_RGBA); 
@@ -99,7 +104,7 @@ void testApp::update(){
 				
 				break;
 				case 5:
-					ofFill();
+					//ofFill();
 					ofSetColor(0xFFFFFF);				
 					image[m.getArgAsInt32(0)].draw(m.getArgAsInt32(1), m.getArgAsInt32(2),m.getArgAsInt32(3),m.getArgAsInt32(4));
 				break;
@@ -199,7 +204,8 @@ void testApp::draw(){
 			
 			break;
 		 default:
-			printf("%d", fv["mirrorMode"]);
+			//printf("%d", fv["mirrorMode"])
+			;
 		}	// mirrowMode
 	if (iv["pixelate"] == 1)	{
 		

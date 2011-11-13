@@ -44,3 +44,16 @@ OF.img(0, 0, 0, 1280, 1024, 0, 0, 0, rrand(), 0, 0, 0);
 
 //:Mirror mode
 OF.int("mirrorMode",1)
+
+
+OF.img(~imageLib.choose('Sanborn-Typography'),0,0,1280, 1024);
+OF.img(1,0,0,1280, 1024);
+
+//:play images from a specific group
+{
+	1000.do{|i|
+		OF.img(rrand(0,60).asInteger,0,0,1280, 1024);
+		i.postln;
+		0.01.wait;
+	}
+}.fork

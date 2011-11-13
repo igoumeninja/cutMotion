@@ -3,7 +3,7 @@
 
 //:Create the hashTable
 ~imageLib = MultiLevelIdentityDictionary.new;
-~loadImages2oF = { | path = "/Users/fou/Media/images/bibliOdyssey/*" |
+~loadImages2oF = { | path = "/Users/ari/Media/images/bibliOdyssey/*" |
 	var folders, files, imageDict;
 	imageDict = IdentityDictionary.new;
 	folders = path.pathMatch;
